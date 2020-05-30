@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             if(name.getText().length()==0)
             {
-                Toast.makeText(getApplicationContext(), "name cannot be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please provide a name", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(uID.getText().length()==0)
             {
-                Toast.makeText(getApplicationContext(), "UID cannot be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please provide a UID", Toast.LENGTH_SHORT).show();
                 return;
             }
             addNew(name.getText().toString(), uID.getText().toString());
