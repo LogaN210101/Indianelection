@@ -1,5 +1,6 @@
 package com.example.indianelection;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +80,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addNew(String n, String u) {
         VoterReset vr=new VoterReset(n,0);
-        db.child("voterList").child(u).setValue(vr);
+        db.child("voterList").child(u).setValue(vr)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getApplicationContext(),"New member added",Toast.LENGTH_SHORT).show();
+                    }
+                });
         name.setText(null);
         uID.setText(null);
     }
@@ -116,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             p= p.substring(p.indexOf('$')+1);
             VoterReset vt = new VoterReset(p,0);
             db.child("voterList").child(ID).setValue(vt);
-            Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Reset Database Successful", Toast.LENGTH_SHORT).show();
         }
 
     }
